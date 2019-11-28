@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 enum OrderStatus{
@@ -12,6 +13,8 @@ public class Order {
     private Address ship_to;
     private OrderStatus status;
     private float total;
+    private ArrayList<LineItem> lineItems;
+    private ArrayList<Payment> payments;
 
     public Order(String name, Date ordered, Date shipped, Address ship_to, float total) {
         this.name = name;
@@ -20,6 +23,8 @@ public class Order {
         this.ship_to = ship_to;
         this.total = total;
         this.status=OrderStatus.NEW;
+        lineItems = new ArrayList<>();
+        payments = new ArrayList<>();
     }
 
     public String getName() {
@@ -69,4 +74,67 @@ public class Order {
     public void setTotal(float total) {
         this.total = total;
     }
+
+    public boolean addLineItem(LineItem lineItem){
+        if(lineItem == null){
+            return false;
+        }
+        if(lineItems.contains(lineItem)){
+            return false;
+        }
+        else if(this.equals(lineItem.getOrder())){
+            lineItems.add(lineItem);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public boolean deleteLineItem(LineItem lineItem){
+        if(lineItem == null){
+            return false;
+        }
+        if(lineItems.contains(lineItem)){
+            lineItems.remove(lineItem);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
+
+    public boolean addPayment(Payment payment){
+        if(payment == null){
+            return false;
+        }
+        if(payments.contains(payment)){
+            return false;
+        }
+        else if(this.equals(payment.getOrder())){
+            payments.add(payment);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public boolean deletePayment(Payment payment){
+        if(payment == null){
+            return false;
+        }
+        if(payments.contains(payment)){
+            payments.remove(payment);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
+
 }

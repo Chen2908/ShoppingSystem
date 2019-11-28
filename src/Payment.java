@@ -3,11 +3,13 @@ abstract class Payment {
     protected String id;
     protected float total;
     protected String details;
+    protected Order order;
 
-    public Payment(String id, float total, String details) {
+    public Payment(String id, float total, String details, Order order) {
         this.id = id;
         this.total = total;
         this.details = details;
+        this.order = order;
     }
 
     public String getId() {
@@ -33,4 +35,9 @@ abstract class Payment {
     public void setDetails(String details) {
         this.details = details;
     }
+
+    public Order getOrder (){
+        return order;
+    }
+
 }
