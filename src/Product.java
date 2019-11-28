@@ -2,36 +2,26 @@
 public class Product {
 
     private String id;
-    private String phone;
-    private String email;
+    private String name;
 
-    public Product(String id, String phone, String email) {
+    public Product(String id, String name) {
         this.id = id;
-        this.phone = phone;
-        this.email = email;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        this.name = name;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getPhone() {
-        return phone;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
