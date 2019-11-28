@@ -2,10 +2,14 @@ public class LineItem {
 
     private int quantity;
     private int price;
+    private Product product;
+    private Order order;
 
-    public LineItem(int quantity, int price) {
+    public LineItem(int quantity, int price, Product product, Order order) {
         this.quantity = quantity;
         this.price = price;
+        this.product = product;
+        this.order = order;
     }
 
     public int getQuantity() {
@@ -22,5 +26,13 @@ public class LineItem {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public Product getProduct(){
+        return product;
+    }
+
+    public Order getOrder(){
+        return order;
     }
 }
