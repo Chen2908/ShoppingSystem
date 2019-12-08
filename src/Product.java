@@ -92,8 +92,15 @@ public class Product {
         for(LineItem lineItem : lLineItems){
             lineItem.deleteLineItem();
         }
+        if(premiumAccount != null){
+            PremiumAccount _premiumAccount = this.premiumAccount;
+            this.premiumAccount = null;
+            _premiumAccount.removeProduct(this);
+        }
         return false;
     }
+
+
 
 
 

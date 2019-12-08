@@ -37,9 +37,16 @@ public class PremiumAccount extends Account {
         }
     }
 
-    private void removeProduct(Product product) {
+    public void removeProduct(Product product) {
         if (lProducts.contains(product)) {
             product.setPremiumAccount(null);
         }
     }
+
+    public void deletePremiumAccount(){
+        for(Product product : lProducts){
+            product.setPremiumAccount(null);
+        }
+    }
+
 }
