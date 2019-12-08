@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Account {
@@ -5,8 +6,10 @@ public class Account {
     protected String billing_Address;
     protected boolean is_Closed;
     protected Date open;
-    protected  Date close;
+    protected Date close;
     protected int balance;
+    protected ArrayList<Order> orders;
+    protected ArrayList<Payment> payments;
 
     public Account(String id, String billing_Address, Date open, Date close, int balance) {
         this.id = id;
@@ -15,6 +18,8 @@ public class Account {
         this.open = open;
         this.close = close;
         this.balance = balance;
+        this.orders = new ArrayList<>();
+        this.payments = new ArrayList<>();
     }
 
     public String getId() {
@@ -63,5 +68,60 @@ public class Account {
 
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public Order getLastOrder() {
+        return this.orders.get(orders.size() - 1);
+    }
+
+    public Payment getLastPayment() {
+        return this.payments.get(payments.size() - 1);
+    }
+
+    public boolean addOrder(Order order) {
+        if (order != null) {
+
+            if (!orders.contains(order)) {
+                orders.add(order);
+                order.setAccount(this);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+
+    public void deleteOrder(Order order) {
+        if (order != null) {
+            if (orders.contains(order)) {
+                order.deleteAccount();
+                orders.remove(order);
+            }
+        }
+
+    }
+
+    public boolean addPayment(Payment payment, int precent) {
+        if (payment != null) {
+
+            if (!payments.contains(payment)) {
+                payments.add(payment);
+                payment.addAccount(this,precent);
+
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    public void deletePayment(Payment payment) {
+        if(payment != null){
+            if(payments.contains(payment)){
+                payments.remove(payment);
+
+            }
+        }
     }
 }

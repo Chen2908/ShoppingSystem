@@ -15,16 +15,19 @@ public class Order {
     private float total;
     private ArrayList<LineItem> lineItems;
     private ArrayList<Payment> payments;
+    private Account account;
 
-    public Order(String name, Date ordered, Date shipped, Address ship_to, float total) {
+    public Order(String name, Date ordered, Date shipped, Address ship_to, float total,Account account) {
         this.name = name;
         this.ordered = ordered;
         this.shipped = shipped;
         this.ship_to = ship_to;
         this.total = total;
-        this.status=OrderStatus.NEW;
+        this.status = OrderStatus.NEW;
         lineItems = new ArrayList<>();
         payments = new ArrayList<>();
+        this.account = account;
+
     }
 
     public String getName() {
@@ -73,6 +76,10 @@ public class Order {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    public Account getAccount() {
+        return account;
     }
 
     public boolean addLineItem(LineItem lineItem){
@@ -127,7 +134,9 @@ public class Order {
             return false;
         }
         if(payments.contains(payment)){
+            payment.deleteOrder();
             payments.remove(payment);
+
             return true;
         }
         else{
@@ -136,5 +145,25 @@ public class Order {
     }
 
 
+    public void deleteAccount() {
+        this.account = null;
+    }
 
-}
+
+    public boolean setAccount(Account account) {
+
+            if(account == null){
+                return false;
+            }
+
+            Account exisAccount = this.account;
+            this.account = account;
+            if(exisAccount != null && !exisAccount.equals(account)){
+                exisAccount.deleteOrder(this);
+            }
+        account.addOrder(this);
+            return true;
+        }
+
+    }
+
