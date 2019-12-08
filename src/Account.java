@@ -10,8 +10,10 @@ public class Account {
     protected int balance;
     protected ArrayList<Order> orders;
     protected ArrayList<Payment> payments;
+    protected ShoppingCart shoppingCart;
+    protected Customer customer;
 
-    public Account(String id, String billing_Address, Date open, Date close, int balance) {
+    public Account(String id, String billing_Address, Date open, Date close, int balance, ShoppingCart shoppingCart,Customer customer) {
         this.id = id;
         this.billing_Address = billing_Address;
         this.is_Closed = false;
@@ -20,6 +22,8 @@ public class Account {
         this.balance = balance;
         this.orders = new ArrayList<>();
         this.payments = new ArrayList<>();
+        this.shoppingCart = shoppingCart;
+        this.customer = customer;
     }
 
     public String getId() {
@@ -124,4 +128,22 @@ public class Account {
             }
         }
     }
+
+    public void deleteShoppingCart() {
+        ShoppingCart existShoppingCart = this.shoppingCart;
+        shoppingCart = null;
+        if(existShoppingCart != null){
+            existShoppingCart.deleteAccount();
+        }
+    }
+
+    public void deleteCustomer() {
+        Customer existCustomr = this.customer;
+        customer = null;
+        if(existCustomr != null){
+            existCustomr.deleteCustomer();
+        }
+    }
+
+
 }
