@@ -10,19 +10,20 @@ public class SystemDatabase {
         private static ArrayList<Supplier> suppliers=new ArrayList<>();
 
 
-        public static void addAccount(String id, String billing_Address, Date open, Date close, int balance) {
-            Account account = new Account(id, billing_Address, open, close, balance);
+
+        public static void addAccount(Address address, String phone, String email, String loginId, String password){
+            WebUser webUser = new WebUser(loginId, password);
+            Account account = new Account(address, phone, email, webUser);
+            webUser.setCustomer(account.getCustomer());
             accounts.add(account);
         }
 
-        public static void addPremiumAccount(String id, String billing_Address, Date open, Date close, int balance) {
-            Account account = new PremiumAccount(id, billing_Address, open, close, balance);
+        public static void addPremiumAccount(Address address, String phone, String email, String loginId, String password){
+            WebUser webUser = new WebUser(loginId, password);
+            Account account = new PremiumAccount(address, phone, email, webUser);
+            webUser.setCustomer(account.getCustomer());
             accounts.add(account);
-        }
-
-        public static void addCustomer(String id, Address address, String phone, String email) {
-            Customer customer = new Customer(id, address, phone, email);
-            customers.add(customer);
+            customers.add(account.getCustomer());
         }
 
         public static void addProduct(String id, String name, String supplierId) {
@@ -30,14 +31,14 @@ public class SystemDatabase {
             products.add(product);
         }
 
-        public static void addSupplier(String id, String name) {
-            Supplier supplier = new Supplier(id, name);
+        public static void addSupplier(String name) {
+            Supplier supplier = new Supplier(name);
             suppliers.add(supplier);
         }
 
-        public static Supplier getSupplier(String id){
+        public static Supplier getSupplier(String name){
             for (Supplier supp: suppliers){
-                if (supp.getId().equals(id))
+                if (supp.getName().equals(name))
                     return supp;
             }
             return null;

@@ -1,15 +1,17 @@
 import java.util.ArrayList;
 
 public class Supplier {
+    public static int generateId=0;
 
     private String id;
     private String name;
     private ArrayList<Product> products;
 
-    public Supplier(String id, String name) {
-        this.id = id;
+    public Supplier(String name) {
+        this.id = ""+generateId;
         this.name = name;
         products = new ArrayList<>();
+        generateId++;
     }
 
     public String getId() {

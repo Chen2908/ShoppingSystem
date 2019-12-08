@@ -1,6 +1,4 @@
 public class Customer {
-
-
     private String id;
     private Address address;
     private String phone;
@@ -8,26 +6,43 @@ public class Customer {
     private WebUser webUser;
     private Account account;
 
+    public Customer(Address address, String phone, String email, Account account){
+        this.id = account.getId();
+        this.account = account;
+        webUser = null;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public Customer(Address address, String phone, String email, ShoppingCart shoppingCart){
+        this.account = new Account(this, shoppingCart);
+        this.id = account.getId();
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+    }
+
     //constructor with no webuser
-    public Customer(String id, Address address, String phone, String email,Account account) {
-        this.id = id;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-        this.webUser=null;
-        this.account = account;
-    }
-
-    //constructor with a webuser
-    public Customer(String id, Address address, String phone, String email, WebUser webUser,Account account) {
-        this.id = id;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-        setWebUser(webUser);
-        this.account = account;
-
-    }
+//    public Customer(String id, Address address, String phone, String email, Account account) {
+//        this.id = id;
+//        this.address = address;
+//        this.phone = phone;
+//        this.email = email;
+//        this.webUser=null;
+//        this.account = account;
+//    }
+//
+//    //constructor with a webuser
+//    public Customer(String id, Address address, String phone, String email, WebUser webUser,Account account) {
+//        this.id = id;
+//        this.address = address;
+//        this.phone = phone;
+//        this.email = email;
+//        setWebUser(webUser);
+//        this.account = account;
+//
+//    }
 
     public String getId() {
         return id;

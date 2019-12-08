@@ -4,8 +4,14 @@ import java.util.Date;
 public class PremiumAccount extends Account {
 
     private ArrayList<Product> lProducts;
-    public PremiumAccount(String id, String billingAddress, Date open, Date close, int balance) {
-        super(id, billingAddress, open, close, balance);
+
+    public PremiumAccount(Address address, String phone, String email, WebUser webuser) {
+        super(address, phone, email, webuser);
+        lProducts = new ArrayList<>();
+    }
+
+    public PremiumAccount(Customer customer, ShoppingCart shoppingCart) {
+        super(customer, shoppingCart);
         lProducts = new ArrayList<>();
     }
 
@@ -13,7 +19,7 @@ public class PremiumAccount extends Account {
         return lProducts;
     }
 
-    public void setlProducts(ArrayList<Product> lProducts) {
+    public void setProducts(ArrayList<Product> lProducts) {
         this.lProducts = lProducts;
     }
 
