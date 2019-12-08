@@ -28,8 +28,8 @@ public class Main {
                         if (SystemDatabase.Database.checkIfProductExist(product)) {
                             Product bamba = SystemDatabase.Database.getProduct(product);
                             Account daniAccount = SystemDatabase.Database.getAccount("Dani");
-//                            Order daniOrder= new Order("BambaOrder",new Date(),
-//                            LineItem lineItem = new LineItem(1, 10, bamba, daniOrder, )
+                            Order daniOrder= new Order(daniAccount.getBilling_Address(), daniAccount);
+//                            LineItem lineItem = new LineItem(1, 5, bamba);
 //
 //                            daniAccount.addOrder()
                         }
@@ -53,9 +53,13 @@ public class Main {
 
     private static void init_dataBase() {
         Address daniAddress = new Address( "Ben Gurion",1,"Beer Sheva", "Israel", 123456);
-        SystemDatabase.Database.addAccount(daniAddress, "0545555555", "dani@post.bgu.ac.il", "Dani", "Dani123");
-        SystemDatabase.Database.addSupplier("Dana");
-        String danaId= SystemDatabase.Database.getSupplier("Dana").getId();
-        SystemDatabase.Database.addProduct("bmb123", "Bamba", danaId);
+        String daniId = SystemDatabase.Database.addAccount(daniAddress, "0545555555", "dani@post.bgu.ac.il", "Dani", "Dani123");
+        Address danaAddress = new Address( "Ben Gurion",2,"Beer Sheva", "Israel", 123456);
+        String danaId= SystemDatabase.Database.addPremiumAccount(danaAddress, "0546666666", "dana@post.bgu.ac.il", "Dana", "Dana123");
+        SystemDatabase.Database.addSupplier("Osem");
+        String OsemId= SystemDatabase.Database.getSupplier("Osem").getId();
+        SystemDatabase.Database.addProduct("bmb123", "Bamba", OsemId);
+        Product bamba = SystemDatabase.Database.getProduct("Bamba");
+        bamba.setPremiumAccount(SystemDatabase.Database.getPremiumAccount(danaId));
     }
 }

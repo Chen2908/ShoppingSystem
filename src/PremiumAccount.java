@@ -19,7 +19,7 @@ public class PremiumAccount extends Account {
         return lProducts;
     }
 
-    public void setProducts(ArrayList<Product> lProducts) {
+    public void setlProducts(ArrayList<Product> lProducts) {
         this.lProducts = lProducts;
     }
 

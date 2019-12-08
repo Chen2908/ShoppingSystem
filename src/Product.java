@@ -81,6 +81,9 @@ public class Product {
 
     public void setPremiumAccount(PremiumAccount premiumAccount) {
         this.premiumAccount = premiumAccount;
+        if (premiumAccount!=null){
+            premiumAccount.addProduct(this);
+        }
     }
 
     public boolean deleteProduct(){

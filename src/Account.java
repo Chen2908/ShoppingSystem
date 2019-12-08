@@ -5,7 +5,7 @@ public class Account {
     public static int generateId=0;
 
     protected String id;
-    protected String billing_Address;
+    protected Address billing_Address;
     protected boolean is_Closed;
     protected Date open;
     protected Date close;
@@ -16,7 +16,7 @@ public class Account {
     protected ShoppingCart shoppingCart;
 
     public Account(Customer customer, ShoppingCart shoppingCart) {
-        this.id = "" + generateId;
+        this.id = Integer.toString(generateId);
         this.billing_Address = null;
         this.is_Closed = false;
         this.open = new Date();
@@ -30,7 +30,7 @@ public class Account {
     }
 
     public Account(Address address, String phone, String email, WebUser webuser){
-        this.id = "" + generateId;
+        this.id = Integer.toString(generateId);
         this.billing_Address = null;
         this.is_Closed = false;
         this.open = new Date();
@@ -55,11 +55,11 @@ public class Account {
         this.id = id;
     }
 
-    public String getBilling_Address() {
+    public Address getBilling_Address() {
         return billing_Address;
     }
 
-    public void setBilling_Address(String billingAddress) {
+    public void setBilling_Address(Address billingAddress) {
         this.billing_Address = billingAddress;
     }
 

@@ -6,8 +6,9 @@ enum OrderStatus{
 }
 
 public class Order {
+    public static int generateId=0;
 
-    private String name;
+    private String number;
     private Date ordered;
     private Date shipped;
     private Address ship_to;
@@ -17,9 +18,10 @@ public class Order {
     private ArrayList<Payment> payments;
     private Account account;
 
-    public Order(String name, Date ordered, Address ship_to, Account account) {
-        this.name = name;
-        this.ordered = ordered;
+
+    public Order(Address ship_to, Account account) {
+        this.number = Integer.toString(generateId);
+        this.ordered = new Date();
         this.shipped = null;
         this.ship_to = ship_to;
         this.total = 0;
@@ -27,11 +29,11 @@ public class Order {
         lineItems = new ArrayList<>();
         payments = new ArrayList<>();
         this.account = account;
-
+        generateId++;
     }
 
-    public String getName() {
-        return name;
+    public String getNumber() {
+        return number;
     }
 
     public Date getOrdered() {
@@ -54,8 +56,8 @@ public class Order {
         return total;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public void setOrdered(Date ordered) {

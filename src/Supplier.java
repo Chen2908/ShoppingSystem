@@ -8,7 +8,7 @@ public class Supplier {
     private ArrayList<Product> products;
 
     public Supplier(String name) {
-        this.id = ""+generateId;
+        this.id = Integer.toString(generateId);
         this.name = name;
         products = new ArrayList<>();
         generateId++;
