@@ -70,25 +70,36 @@ public class Customer {
 
     public boolean setWebUser(WebUser newWebUser){
         //assumes that cannot set a null webuser
-        if (newWebUser== null)
+        if (newWebUser== null) {
+            newWebUser = null;
             return false;
+        }
         //unable to set the new webuser
         if (webUser!=null && !webUser.equals(newWebUser) && equals(webUser.getCustomer())){
             return false;
         }
         Customer me= newWebUser.getCustomer();
-        if (! this.equals(me)){
+        if (!this.equals(me)){
             return false;
+        }else{
+            this.webUser = newWebUser;
+            return true;
         }
-        webUser=newWebUser;
-        return true;
     }
 
     public void removeWebUser(){
         WebUser existingWebUser = webUser;
         webUser=null;
         if (existingWebUser!=null){
-            existingWebUser.delete();
+            existingWebUser.deleteWebUser();
+        }
+    }
+
+    public void deleteCustomer (){
+        if(hasWebUser()){
+            WebUser _webUser = this.webUser;
+            this.webUser = null;
+            _webUser.deleteWebUser();
         }
     }
 }
