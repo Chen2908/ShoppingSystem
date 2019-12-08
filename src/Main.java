@@ -26,8 +26,12 @@ public class Main {
                         System.out.println("Please enter the product you'd like to buy:");
                         String product = sc.nextLine();
                         if (SystemDatabase.Database.checkIfProductExist(product)) {
+                            Product bamba = SystemDatabase.Database.getProduct(product);
                             Account daniAccount = SystemDatabase.Database.getAccount("Dani");
+                           // Order daniOrder= new Order("BambaOrder",new Date(), null, daniAccount.billing_Address, daniAccount);
+                           // LineItem lineItem = new LineItem(1, 10, bamba, daniOrder, )
 
+                          //  daniAccount.addOrder()
                         }
 
                         break;
@@ -48,9 +52,8 @@ public class Main {
     }
 
     private static void init_dataBase() {
-        Date openDate = new Date(2019, 12, 1);
-        SystemDatabase.Database.addAccount("Dani", "Israel", openDate, null, 0);
-        SystemDatabase.Database.addPremiumAccount("Dana", "Israel", openDate, null, 0);
+        SystemDatabase.Database.addAccount("Dani", "Israel", new Date(), null, 0);
+        SystemDatabase.Database.addPremiumAccount("Dana", "Israel", new Date(), null, 0);
         SystemDatabase.Database.addSupplier("123456", "Dana");
         SystemDatabase.Database.addProduct("bmb123", "Bamba", "123456");
     }

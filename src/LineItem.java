@@ -59,7 +59,7 @@ public class LineItem {
         Order _order = this.order;
         this.order = null;
         if(_order != null){
-            _order.removeLineItem(this); 
+            _order.removeLineItem(this);
         }
     }
 

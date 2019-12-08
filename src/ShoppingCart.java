@@ -6,11 +6,13 @@ public class ShoppingCart {
     private Date created;
     private WebUser webUser;
     private ArrayList<LineItem> lLineItems;
+    private Account account;
 
-    public ShoppingCart(WebUser webUser) {
+    public ShoppingCart(WebUser webUser, Account account) {
         this.created = new Date();
         this.webUser=webUser;
         this.lLineItems = new ArrayList<>();
+        this.account = account;
     }
 
     public Date getCreated() {
@@ -62,6 +64,14 @@ public class ShoppingCart {
     public void setWebUser(WebUser webUser) {
         if (webUser==null){
 
+        }
+    }
+
+    public void deleteAccount(){
+        Account existAccount = this.account;
+        account = null;
+        if(existAccount != null){
+            existAccount.deleteShoppingCart();
         }
     }
 

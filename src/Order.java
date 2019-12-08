@@ -17,12 +17,12 @@ public class Order {
     private ArrayList<Payment> payments;
     private Account account;
 
-    public Order(String name, Date ordered, Address ship_to, float total,Account account) {
+    public Order(String name, Date ordered, Address ship_to, Account account) {
         this.name = name;
         this.ordered = ordered;
         this.shipped = null;
         this.ship_to = ship_to;
-        this.total = total;
+        this.total = 0;
         this.status = OrderStatus.NEW;
         lineItems = new ArrayList<>();
         payments = new ArrayList<>();

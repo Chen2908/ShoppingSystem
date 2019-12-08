@@ -4,17 +4,11 @@ import java.util.Date;
 public class SystemDatabase {
 
     public static class Database {
-        private static ArrayList<Account> accounts;
-        private static ArrayList<Customer> customers;
-        private static ArrayList<Product> products;
-        private static ArrayList<Supplier> suppliers;
+        private static ArrayList<Account> accounts= new ArrayList<>();
+        private static ArrayList<Customer> customers= new ArrayList<>();
+        private static ArrayList<Product> products= new ArrayList<>();
+        private static ArrayList<Supplier> suppliers=new ArrayList<>();
 
-        public Database() {
-            accounts = new ArrayList<>();
-            customers = new ArrayList<>();
-            products = new ArrayList<>();
-            suppliers = new ArrayList<>();
-        }
 
         public static void addAccount(String id, String billing_Address, Date open, Date close, int balance) {
             Account account = new Account(id, billing_Address, open, close, balance);
@@ -61,6 +55,14 @@ public class SystemDatabase {
             for (Account account: accounts){
                 if (account.getId().equals(id))
                     return account;
+            }
+            return null;
+        }
+
+        public static Product getProduct(String product) {
+            for (Product pro: products){
+                if (pro.getName().equals(product))
+                    return pro;
             }
             return null;
         }

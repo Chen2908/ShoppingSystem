@@ -6,23 +6,27 @@ public class Customer {
     private String phone;
     private String email;
     private WebUser webUser;
+    private Account account;
 
     //constructor with no webuser
-    public Customer(String id, Address address, String phone, String email) {
+    public Customer(String id, Address address, String phone, String email,Account account) {
         this.id = id;
         this.address = address;
         this.phone = phone;
         this.email = email;
         this.webUser=null;
+        this.account = account;
     }
 
     //constructor with a webuser
-    public Customer(String id, Address address, String phone, String email, WebUser webUser) {
+    public Customer(String id, Address address, String phone, String email, WebUser webUser,Account account) {
         this.id = id;
         this.address = address;
         this.phone = phone;
         this.email = email;
         setWebUser(webUser);
+        this.account = account;
+
     }
 
     public String getId() {
@@ -100,6 +104,14 @@ public class Customer {
             WebUser _webUser = this.webUser;
             this.webUser = null;
             _webUser.deleteWebUser();
+        }
+    }
+
+    public void deleteAccount() {
+        Account existAccount = this.account;
+        account = null;
+        if(existAccount != null){
+            existAccount.deleteCustomer();
         }
     }
 }
