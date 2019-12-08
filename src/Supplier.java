@@ -52,12 +52,18 @@ public class Supplier {
         if(aProduct == null){
             return false;
         }
-        if(products.contains(aProduct)){
+        if(products.contains(aProduct) && !this.equals(aProduct.getSupplier())){
             products.remove(aProduct);
             return true;
         }
         else{
             return false;
+        }
+    }
+
+    public void deleteSupplier (){
+        for( Product product : products){
+            product.deleteProduct();
         }
     }
 

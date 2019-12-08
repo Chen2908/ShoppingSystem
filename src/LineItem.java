@@ -4,12 +4,15 @@ public class LineItem {
     private int price;
     private Product product;
     private Order order;
+    private ShoppingCart shoppingCart;
 
-    public LineItem(int quantity, int price, Product product, Order order) {
+
+    public LineItem(int quantity, int price, Product product, Order order, ShoppingCart shoppingCart) {
         this.quantity = quantity;
         this.price = price;
         this.product = product;
         this.order = order;
+        this.shoppingCart = shoppingCart;
     }
 
     public int getQuantity() {
@@ -34,5 +37,21 @@ public class LineItem {
 
     public Order getOrder(){
         return order;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
+    public void deleteLineItem(){
+        Product product = this.product;
+        if(product != null){
+            product.removeLineItem(this);
+        }
+        this.shoppingCart = null;
     }
 }
