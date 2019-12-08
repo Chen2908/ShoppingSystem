@@ -17,7 +17,7 @@ public class Order {
     private ArrayList<Payment> payments;
     private Account account;
 
-    public Order(String name, Date ordered, Date shipped, Address ship_to, float total,Account account) {
+    public Order(String name, Date ordered, Date shipped, Address ship_to, float total, Account account) {
         this.name = name;
         this.ordered = ordered;
         this.shipped = shipped;
