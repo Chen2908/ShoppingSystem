@@ -47,11 +47,21 @@ public class LineItem {
         this.shoppingCart = shoppingCart;
     }
 
+    public void setOrder(Order order) {
+        this.order = order;
+    }
     public void deleteLineItem(){
         Product product = this.product;
         if(product != null){
             product.removeLineItem(this);
         }
         this.shoppingCart = null;
+        Order _order = this.order;
+        this.order = null;
+        if(_order != null){
+            _order.removeLineItem(this); 
+        }
     }
+
+
 }

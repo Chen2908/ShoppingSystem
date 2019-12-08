@@ -17,10 +17,10 @@ public class Order {
     private ArrayList<Payment> payments;
     private Account account;
 
-    public Order(String name, Date ordered, Date shipped, Address ship_to, float total,Account account) {
+    public Order(String name, Date ordered, Address ship_to, float total,Account account) {
         this.name = name;
         this.ordered = ordered;
-        this.shipped = shipped;
+        this.shipped = null;
         this.ship_to = ship_to;
         this.total = total;
         this.status = OrderStatus.NEW;
@@ -83,22 +83,23 @@ public class Order {
     }
 
     public boolean addLineItem(LineItem lineItem){
-        if(lineItem == null){
+        if(lineItem == null || lineItems.contains(lineItem)){
             return false;
         }
-        if(lineItems.contains(lineItem)){
-            return false;
-        }
-        else if(this.equals(lineItem.getOrder())){
+        Order _order = lineItem.getOrder();
+        if(_order != null && !this.equals(_order)){
+            _order.removeLineItem(lineItem);
+            lineItem.setOrder(this);
             lineItems.add(lineItem);
             return true;
         }
         else{
-            return false;
+            lineItems.add(lineItem);
+            return true;
         }
     }
 
-    public boolean deleteLineItem(LineItem lineItem){
+    public boolean removeLineItem(LineItem lineItem){
         if(lineItem == null){
             return false;
         }
@@ -163,7 +164,13 @@ public class Order {
             }
         account.addOrder(this);
             return true;
-        }
-
     }
+
+    public void deleteOrder(){
+        for(LineItem lineItem: lineItems){
+            lineItem.deleteLineItem();
+        }
+    }
+
+}
 
