@@ -31,7 +31,7 @@ public class Account {
 
     public Account(Address address, String phone, String email, WebUser webuser){
         this.id = Integer.toString(generateId);
-        this.billing_Address = null;
+        this.billing_Address = address;
         this.is_Closed = false;
         this.open = new Date();
         this.close = null;
@@ -53,6 +53,10 @@ public class Account {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
     }
 
     public Address getBilling_Address() {

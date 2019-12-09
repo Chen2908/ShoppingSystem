@@ -80,6 +80,16 @@ public class Order {
         this.total = total;
     }
 
+    @Override
+    public String toString(){
+        String order = "Order number: " + this.number + "\n " +
+                        "Date of order: " + ordered + "\n " +
+                        "Ship to : " + ship_to + "\n " +
+                        "Status: " + status + "\n" +
+                        "Total payment: " + total + "\n";
+        return order;
+    }
+
     public Account getAccount() {
         return account;
     }

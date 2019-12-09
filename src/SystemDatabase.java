@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Date;
 
 public class SystemDatabase {
 
@@ -10,8 +9,6 @@ public class SystemDatabase {
         private static ArrayList<Product> products= new ArrayList<>();
         private static ArrayList<Supplier> suppliers=new ArrayList<>();
         private static ArrayList<WebUser> webUsers=new ArrayList<>();
-
-
 
 
         public static String addAccount(Address address, String phone, String email, String loginId, String password){
@@ -33,8 +30,8 @@ public class SystemDatabase {
             return account.getId();
         }
 
-        public static void addProduct(String id, String name, String supplierId) {
-            Product product = new Product(id, name, getSupplier(supplierId));
+        public static void addProduct(String id, String name, String supplierName) {
+            Product product = new Product(id, name, getSupplier(supplierName));
             products.add(product);
         }
 
@@ -67,6 +64,14 @@ public class SystemDatabase {
             return null;
         }
 
+        public static String getId(String username){
+            for(WebUser webuser: webUsers) {
+                if (webuser.getLogin_Id().equals(username))
+                    return webuser.getCustomer().getId();
+            }
+            return null;
+        }
+
         public static PremiumAccount getPremiumAccount(String id){
             for (PremiumAccount account: premiumAccounts){
                 if (account.getId().equals(id))
@@ -76,13 +81,20 @@ public class SystemDatabase {
         }
 
 
-
         public static Product getProduct(String product) {
             for (Product pro: products){
                 if (pro.getName().equals(product))
                     return pro;
             }
             return null;
+        }
+
+        public static boolean checkIfUserExist(String loginId, String password){
+            for(WebUser webuser: webUsers){
+                if (webuser.getLogin_Id().equals(loginId) && webuser.getPassword().equals(password))
+                    return true;
+            }
+            return false;
         }
     }
 

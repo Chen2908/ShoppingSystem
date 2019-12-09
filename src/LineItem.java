@@ -12,6 +12,7 @@ public class LineItem {
         this.price = price;
         this.product = product;
         this.order = order;
+        this.order.setTotal(this.quantity*this.price);
         this.shoppingCart = shoppingCart;
     }
 
