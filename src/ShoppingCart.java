@@ -8,11 +8,18 @@ public class ShoppingCart {
     private ArrayList<LineItem> lLineItems;
     private Account account;
 
-    public ShoppingCart(WebUser webUser, Account account) {
+    public ShoppingCart(Account account, WebUser webuser) {
         this.created = new Date();
-        this.webUser=webUser;
         this.lLineItems = new ArrayList<>();
         this.account = account;
+        this.webUser = webuser;
+    }
+
+    public ShoppingCart(Customer customer,  WebUser webuser) {
+        this.created = new Date();
+        this.lLineItems = new ArrayList<>();
+        this.account = new Account(customer, this);
+        this.webUser = webuser;
     }
 
     public Date getCreated() {

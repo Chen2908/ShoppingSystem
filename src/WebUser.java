@@ -10,7 +10,7 @@ public class WebUser {
     private Customer customer;
     private ShoppingCart shoppingCart;
 
-    //constructor without shoppingCart
+
     public WebUser(String login_Id, String password, Customer customer) {
         this.login_Id = login_Id;
         this.password = password;
@@ -20,15 +20,23 @@ public class WebUser {
         this.shoppingCart = null;
     }
 
-    //constructor with shoppingCart
-    public WebUser(String login_Id, String password, Customer customer, ShoppingCart shoppingCart) {
+    public WebUser(String login_Id, String password) {
         this.login_Id = login_Id;
         this.password = password;
         this.state = userState.NEW;
         //verify one customer only
-        this.customer=customer;
-        this.shoppingCart = shoppingCart;
+        this.shoppingCart = null;
     }
+
+//    //constructor with shoppingCart
+//    public WebUser(String login_Id, String password, Customer customer, ShoppingCart shoppingCart) {
+//        this.login_Id = login_Id;
+//        this.password = password;
+//        this.state = userState.NEW;
+//        //verify one customer only
+//        this.customer=customer;
+//        this.shoppingCart = shoppingCart;
+//    }
 
     public String getLogin_Id() {
         return login_Id;
@@ -56,6 +64,11 @@ public class WebUser {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        if (customer!=null)
+            this.customer = customer;
     }
 
     public ShoppingCart getShoppingCart() {

@@ -2,8 +2,8 @@ public class ImmediatePayment extends Payment {
 
     private boolean phoneConfirmation;
 
-    public ImmediatePayment(String id, float total, String details, Order order, Account account) {
-        super(id,total,details,order, account);
+    public ImmediatePayment(float total, String details, Order order, Account account) {
+        super(total,details,order, account);
         this.phoneConfirmation = false;
     }
 

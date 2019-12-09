@@ -1,43 +1,48 @@
 import java.util.ArrayList;
-import java.util.Date;
 
 public class SystemDatabase {
 
     public static class Database {
         private static ArrayList<Account> accounts= new ArrayList<>();
+        private static ArrayList<PremiumAccount> premiumAccounts= new ArrayList<>();
         private static ArrayList<Customer> customers= new ArrayList<>();
         private static ArrayList<Product> products= new ArrayList<>();
         private static ArrayList<Supplier> suppliers=new ArrayList<>();
+        private static ArrayList<WebUser> webUsers=new ArrayList<>();
 
 
-        public static void addAccount(String id, String billing_Address, Date open, Date close, int balance) {
-            Account account = new Account(id, billing_Address, open, close, balance);
+        public static String addAccount(Address address, String phone, String email, String loginId, String password){
+            WebUser webUser = new WebUser(loginId, password);
+            Account account = new Account(address, phone, email, webUser);
+            webUser.setCustomer(account.getCustomer());
+            webUsers.add(webUser);
             accounts.add(account);
+            customers.add(account.getCustomer());
+            return account.getId();
         }
 
-        public static void addPremiumAccount(String id, String billing_Address, Date open, Date close, int balance) {
-            Account account = new PremiumAccount(id, billing_Address, open, close, balance);
-            accounts.add(account);
+        public static String addPremiumAccount(Address address, String phone, String email, String loginId, String password){
+            WebUser webUser = new WebUser(loginId, password);
+            PremiumAccount account = new PremiumAccount(address, phone, email, webUser);
+            webUser.setCustomer(account.getCustomer());
+            premiumAccounts.add(account);
+            customers.add(account.getCustomer());
+            return account.getId();
         }
 
-        public static void addCustomer(String id, Address address, String phone, String email) {
-            Customer customer = new Customer(id, address, phone, email);
-            customers.add(customer);
-        }
-
-        public static void addProduct(String id, String name, String supplierId) {
-            Product product = new Product(id, name, getSupplier(supplierId));
+        public static void addProduct(String id, String name, String supplierName) {
+            Product product = new Product(id, name, getSupplier(supplierName));
             products.add(product);
         }
 
-        public static void addSupplier(String id, String name) {
-            Supplier supplier = new Supplier(id, name);
+        public static void addSupplier(String name) {
+            Supplier supplier = new Supplier(name);
             suppliers.add(supplier);
         }
 
-        public static Supplier getSupplier(String id){
+        public static Supplier getSupplier(String name){
             for (Supplier supp: suppliers){
-                if (supp.getId().equals(id))
+                if (supp.getName().equals(name))
                     return supp;
             }
             return null;
@@ -59,12 +64,37 @@ public class SystemDatabase {
             return null;
         }
 
+        public static String getId(String username){
+            for(WebUser webuser: webUsers) {
+                if (webuser.getLogin_Id().equals(username))
+                    return webuser.getCustomer().getId();
+            }
+            return null;
+        }
+
+        public static PremiumAccount getPremiumAccount(String id){
+            for (PremiumAccount account: premiumAccounts){
+                if (account.getId().equals(id))
+                    return account;
+            }
+            return null;
+        }
+
+
         public static Product getProduct(String product) {
             for (Product pro: products){
                 if (pro.getName().equals(product))
                     return pro;
             }
             return null;
+        }
+
+        public static boolean checkIfUserExist(String loginId, String password){
+            for(WebUser webuser: webUsers){
+                if (webuser.getLogin_Id().equals(loginId) && webuser.getPassword().equals(password))
+                    return true;
+            }
+            return false;
         }
     }
 

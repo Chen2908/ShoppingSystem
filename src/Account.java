@@ -2,8 +2,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Account {
+    public static int generateId=0;
+
     protected String id;
-    protected String billing_Address;
+    protected Address billing_Address;
     protected boolean is_Closed;
     protected Date open;
     protected Date close;
@@ -13,17 +15,36 @@ public class Account {
     protected Customer customer;
     protected ShoppingCart shoppingCart;
 
-    public Account(String id, String billing_Address, Date open, Date close, int balance, Customer customer,ShoppingCart shoppingCart) {
-        this.id = id;
-        this.billing_Address = billing_Address;
+    public Account(Customer customer, ShoppingCart shoppingCart) {
+        this.id = Integer.toString(generateId);
+        this.billing_Address = null;
         this.is_Closed = false;
-        this.open = open;
-        this.close = close;
-        this.balance = balance;
+        this.open = new Date();
+        this.close = null;
+        this.balance = 0;
         this.orders = new ArrayList<>();
         this.payments = new ArrayList<>();
         this.customer = customer;
         this.shoppingCart = shoppingCart;
+        generateId++;
+    }
+
+    public Account(Address address, String phone, String email, WebUser webuser){
+        this.id = Integer.toString(generateId);
+        this.billing_Address = address;
+        this.is_Closed = false;
+        this.open = new Date();
+        this.close = null;
+        this.balance = 0;
+        this.orders = new ArrayList<>();
+        this.payments = new ArrayList<>();
+        this.customer = new Customer(address, phone, email, this);
+        this.shoppingCart = new ShoppingCart(this, webuser);
+        generateId++;
+    }
+
+    public Customer getCustomer() {
+        return customer;
     }
 
     public String getId() {
@@ -34,11 +55,15 @@ public class Account {
         this.id = id;
     }
 
-    public String getBilling_Address() {
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public Address getBilling_Address() {
         return billing_Address;
     }
 
-    public void setBilling_Address(String billingAddress) {
+    public void setBilling_Address(Address billingAddress) {
         this.billing_Address = billingAddress;
     }
 

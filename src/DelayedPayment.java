@@ -1,19 +1,21 @@
 
 import java.time.LocalDateTime;
+import java.util.Date;
+
 public class DelayedPayment extends Payment {
 
-    private LocalDateTime paymentDate;
+    private Date paymentDate;
 
-    public DelayedPayment(String id, float total, String details, LocalDateTime paymentDate,Order order, Account account) {
-        super(id,total,details,order, account);
+    public DelayedPayment(float total, String details, Date paymentDate, Order order, Account account) {
+        super(total,details,order, account);
         this.paymentDate = paymentDate;
     }
 
-    public LocalDateTime getPaymentDate() {
+    public Date getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(LocalDateTime paymentDate) {
+    public void setPaymentDate(Date paymentDate) {
         this.paymentDate = paymentDate;
     }
 

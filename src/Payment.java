@@ -1,20 +1,21 @@
 import java.util.ArrayList;
 
 abstract class Payment {
-
+    public static int generateId=0;
     protected String id;
     protected float total;
     protected String details;
     protected Order order;
     protected ArrayList<Account> accounts;
 
-    public Payment(String id, float total, String details, Order order, Account account) {
-        this.id = id;
+    public Payment( float total, String details, Order order, Account account) {
+        this.id = Integer.toString(generateId);
         this.total = total;
         this.details = details;
         this.order = order;
         this.accounts = new ArrayList<>();
         addAccount(account,100);
+        generateId++;
 
     }
 
