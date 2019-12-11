@@ -102,6 +102,9 @@ public class Account {
     public Order getLastOrder() {
         return this.orders.get(orders.size() - 1);
     }
+    public int getNumOfOrder(){
+        return this.orders.size();
+    }
 
     public Payment getLastPayment() {
         return this.payments.get(payments.size() - 1);

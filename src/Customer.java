@@ -23,27 +23,6 @@ public class Customer {
         this.email = email;
     }
 
-    //constructor with no webuser
-//    public Customer(String id, Address address, String phone, String email, Account account) {
-//        this.id = id;
-//        this.address = address;
-//        this.phone = phone;
-//        this.email = email;
-//        this.webUser=null;
-//        this.account = account;
-//    }
-//
-//    //constructor with a webuser
-//    public Customer(String id, Address address, String phone, String email, WebUser webUser,Account account) {
-//        this.id = id;
-//        this.address = address;
-//        this.phone = phone;
-//        this.email = email;
-//        setWebUser(webUser);
-//        this.account = account;
-//
-//    }
-
     public String getId() {
         return id;
     }
@@ -124,6 +103,10 @@ public class Customer {
 
     public void deleteAccount() {
         Account existAccount = this.account;
+        existAccount.deleteShoppingCart();
+        for(int i=0;i<existAccount.orders.size();i++){
+            existAccount.deleteOrder(existAccount.orders.get(i));
+        }
         account = null;
         if(existAccount != null){
             existAccount.deleteCustomer();

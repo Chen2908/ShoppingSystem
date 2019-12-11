@@ -28,15 +28,6 @@ public class WebUser {
         this.shoppingCart = null;
     }
 
-//    //constructor with shoppingCart
-//    public WebUser(String login_Id, String password, Customer customer, ShoppingCart shoppingCart) {
-//        this.login_Id = login_Id;
-//        this.password = password;
-//        this.state = userState.NEW;
-//        //verify one customer only
-//        this.customer=customer;
-//        this.shoppingCart = shoppingCart;
-//    }
 
     public String getLogin_Id() {
         return login_Id;

@@ -37,6 +37,7 @@ public class Main {
             System.out.println("------------------------");
             System.out.println("To exit press 3");
             System.out.println("------------------------");
+
             choice = sc.nextLine();
             switch (choice) {
                 case "1":
@@ -72,13 +73,19 @@ public class Main {
                 case "2":
                     String accountId = SystemDatabase.Database.getId(userName);
                     Account account = SystemDatabase.Database.getAccount(accountId);
-                    Order lastOrder = account.getLastOrder();
-                    System.out.println(lastOrder);
+                    int numOfOreser = account.getNumOfOrder();
+                    if (numOfOreser == 0) {
+                        System.out.println("there is no orders yet");
+
+                    } else {
+                        Order lastOrder = account.getLastOrder();
+                        System.out.println(lastOrder);
+                    }
                     break;
 
                 case "3":
                     System.out.println("bye bye");
-                    notExit=false;
+                    notExit = false;
                     break;
             }
         }
